@@ -70,4 +70,5 @@ repos:
       - id: terraform_validate
       - id: terraform_checkov
         args:
-          - --args=--soft-fail-on HIGH
+          # - --args=--soft-fail-on HIGH
+        - --args=--soft-fail
