@@ -62,3 +62,13 @@ repos:
     rev: 1.7.5
     hooks:
       - id: bandit
+
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.83.2
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_validate
+      - id: terraform_checkov
+        args:
+          - --args=--quiet
+          - --args=--soft-fail-on LOW
