@@ -22,4 +22,6 @@ jobs:
       run: pipenv install --dev --deploy
 
     - name: Run pre-commit hooks
+      env:
+        BC_API_KEY: ${{ secrets.BRIDGECREW_CHECKOV_API_KEY }}
       run: pipenv run pre-commit run --all-files
