@@ -1,0 +1,58 @@
+digraph G {
+    graph [fontname = "Handlee"];
+    node [fontname = "Handlee"];
+    edge [fontname = "Handlee"];
+
+    bgcolor=transparent;
+
+    subgraph cluster_model_registry_and_tracker {
+	label = "*process #2*";
+	label = "*Model tracker and registry*";
+	fontsize = 20;
+
+	"MLFlow application DB
+	(AWS RDS - postgres)"
+	->
+	"MLFlow server
+(EC2 with docker ECR)" [dir=both]
+    }
+
+    subgraph cluster_model_API_service {
+	label = "*Blurring model API service*"
+
+	"Rate limiter" -> "Load balancer" -> "FastAPI on docker image" [dir=both]
+
+	"FastAPI on docker image" -> "Logging database" [dir=both]
+    }
+
+    subgraph cluster_model_training {
+	label="*Model training*"
+
+	"Training dataset (S3)" -> "Training job scripts" [dir="both"]
+
+	"Training job scripts" -> "Orchestration with AirFlow / Prefect" [dir="both"]
+
+	"Training job scripts" -> "MLFlow server
+(EC2 with docker ECR)"
+    }
+
+    subgraph cluster_model_monitoring {
+	label="*Model monitoring*"
+	"prometheus"->	"grafana"
+    }
+
+    subgraph cluster_api_service_monitoring {
+	label="*Model monitoring*"
+	"prometheus"
+	"grafana"
+    }
+
+    "FastAPI on docker image"->"MLFlow server
+(EC2 with docker ECR)" [dir=both]
+
+    "Rate limiter"->"External world" [dir=both]
+
+    "FastAPI on docker image" -> "prometheus"
+
+    "Logging database" -> "prometheus"
+}
