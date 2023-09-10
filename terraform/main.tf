@@ -22,7 +22,7 @@ module "ecs_task_definition" {
   face_blur_model_service_task_container_name = var.face_blur_model_service_task_container_name
 
   face_blur_ui_security_group_id   = module.security_groups.face_blur_ui_security_group_id
-  face_blur_ui_task_container_name = var.face_blur_model_service_task_container_name
+  face_blur_ui_task_container_name = var.face_blur_ui_task_container_name
 }
 
 module "ecs_service" {
@@ -39,7 +39,7 @@ module "ecs_service" {
   face_blur_ui_security_group_id   = module.security_groups.face_blur_ui_security_group_id
   face_blur_ui_lb_target_group_arn = module.alb.face_blur_ui_lb_target_group_arn
   face_blur_ui_task_arn            = module.ecs_task_definition.face_blur_ui_task_arn
-  face_blur_ui_task_container_name = var.face_blur_model_service_task_container_name
+  face_blur_ui_task_container_name = var.face_blur_ui_task_container_name
 
 }
 
