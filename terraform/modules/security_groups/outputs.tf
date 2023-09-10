@@ -9,3 +9,7 @@ output "face_blur_ui_security_group_id" {
 output "grafana_security_group_id" {
   value = aws_security_group.grafana_sg.id
 }
+
+output "prometheus_security_group_id" {
+  value = aws_security_group.prometheus_sg.id
+}
