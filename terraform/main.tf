@@ -12,6 +12,13 @@ module "security_groups" {
   vpc_id = module.network.vpc_id
 }
 
+module "ec2" {
+  source = "./modules/ec2"
+
+  public_subnet_a_id           = module.network.public_subnet_a_id
+  prometheus_security_group_id = module.security_groups.prometheus_security_group_id
+}
+
 module "ecs_task_definition" {
   source = "./modules/ecs_task_definition"
 
@@ -63,8 +70,15 @@ module "alb" {
 
 }
 
+module "storage" {
+  source = "./modules/storage"
+
+  prometheus_instance_availability_zone = module.ec2.prometheus_instance_availability_zone
+}
+
 module "route53" {
   source = "./modules/route53"
 
-  lb = module.alb.privfacy_alb
+  lb                            = module.alb.privfacy_alb
+  prometheus_instance_public_ip = module.ec2.prometheus_instance_public_ip
 }

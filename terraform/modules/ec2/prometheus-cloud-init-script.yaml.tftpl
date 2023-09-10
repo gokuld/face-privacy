@@ -1,0 +1,30 @@
+#cloud-config
+${yamlencode({
+  package_upgrade = true,
+
+  packages = [
+    "xfsprogs",
+    "docker"
+  ],
+
+  write_files = [
+    {
+      path = "/etc/prometheus/prometheus.yml",
+      content = file("./modules/ec2/prometheus.yml")
+    }
+  ],
+
+  runcmd = [
+    "echo \"Installing and starting docker...\"",
+    "usermod -aG docker ec2-user",
+    "service docker start",
+    "chkconfig docker on",
+    "echo \"Formatting and mounting the EBS volume for Prometheus data...\"",
+    "mkdir /mnt/prometheus_data",
+    "chown nobody:nobody /mnt/prometheus_data",
+    "mkfs -t xfs /dev/xvdf",
+    "mount /dev/xvdf /mnt/prometheus_data",
+    "echo \"Starting Prometheus with docker...\"",
+    "docker run -d --name prometheus -p 9090:9090 -v /mnt/prometheus_data:/prometheus -v /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus"
+  ]
+})}
