@@ -5,3 +5,7 @@ output "face_blur_model_service_task_arn" {
 output "face_blur_ui_task_arn" {
   value = aws_ecs_task_definition.face_blur_ui_task.arn
 }
+
+output "grafana_task_arn" {
+  value = aws_ecs_task_definition.grafana_task.arn
+}

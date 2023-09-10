@@ -10,3 +10,8 @@ variable "face_blur_ui_security_group_id" {}
 variable "face_blur_ui_lb_target_group_arn" {}
 variable "face_blur_ui_task_container_name" {}
 variable "face_blur_ui_task_arn" {}
+
+variable "grafana_security_group_id" {}
+variable "grafana_lb_target_group_arn" {}
+variable "grafana_task_container_name" {}
+variable "grafana_task_arn" {}
