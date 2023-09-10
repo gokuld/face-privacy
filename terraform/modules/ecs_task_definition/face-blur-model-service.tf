@@ -1,31 +1,8 @@
-resource "aws_iam_role" "face_blur_model_service_execution_role" {
-  name = "face_blur_model_service_execution_role"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Action = "sts:AssumeRole",
-        Effect = "Allow",
-        Principal = {
-          Service = "ecs-tasks.amazonaws.com"
-        }
-      }
-    ]
-  })
-}
-
-resource "aws_iam_policy_attachment" "ecs_task_execution_policy_attachment" {
-  name       = "ecs-task-execution-policy-attachment"
-  roles      = [aws_iam_role.face_blur_model_service_execution_role.name]
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
-
 resource "aws_ecs_task_definition" "face_blur_model_service_task" {
   family                   = "face-blur-model-service-task"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  execution_role_arn       = aws_iam_role.face_blur_model_service_execution_role.arn
+  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   cpu                      = "512"  # Adjust CPU units as needed # TODO make this a tf var
   memory                   = "3072" # Adjust memory in MiB as needed # TODO make this a tf var
 
