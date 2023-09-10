@@ -6,3 +6,6 @@ variable "face_blur_model_service_task_container_name" {}
 
 variable "face_blur_ui_security_group_id" {}
 variable "face_blur_ui_task_container_name" {}
+
+variable "grafana_security_group_id" {}
+variable "grafana_task_container_name" {}
