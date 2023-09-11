@@ -1,0 +1,9 @@
+{% extends bento_base_template %}
+{% block SETUP_BENTO_COMPONENTS %}
+{{ super() }}
+
+ENV DEEPFACE_HOME={{ bento__home }}bento/src/
+
+RUN python3 {{ bento__home }}bento/src/register_bentoml_model.py
+
+{% endblock %}
