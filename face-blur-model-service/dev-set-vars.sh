@@ -1,0 +1,1 @@
+export DEEPFACE_HOME=$PWD

@@ -1,0 +1,9 @@
+service: "service.py:svc"
+include:
+  - "*.py"
+  - .deepface/weights/retinaface.h5
+python:
+  requirements_txt: requirements.txt
+docker:
+  distro: debian
+  dockerfile_template: "./Dockerfile.template"
