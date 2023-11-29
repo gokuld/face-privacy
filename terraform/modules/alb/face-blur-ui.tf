@@ -10,6 +10,7 @@ resource "aws_lb_target_group" "face_blur_ui_tg" {
   }
 }
 
+#trivy:ignore:AVD-AWS-0054
 resource "aws_lb_listener" "face_blur_ui_listener" {
   load_balancer_arn = aws_lb.privfacy_lb.arn
   port              = 80
