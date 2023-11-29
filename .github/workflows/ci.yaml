@@ -31,6 +31,7 @@ jobs:
       with:
         scan-type: fs
         scanners: 'vuln,config,secret,license'
+        trivyignores: './trivyignore.yaml'
         hide-progress: false
         #format: 'sarif'
         # output: 'trivy-results.sarif'
