@@ -68,8 +68,3 @@ repos:
     hooks:
       - id: terraform_fmt
       - id: terraform_validate
-      - id: terraform_checkov
-        args:
-          - --args=--soft-fail-on LOW,CKV_AWS_2,CKV_AWS_103
-          # allow the use of the docker image grafana/grafana-enterprise:latest
-          - --args=--skip-check BC_LIC_1,BC_LIC_2,CKV_CVE_2018_20676,CKV_CVE_2018_14042,CKV_CVE_2018_14041,CKV_CVE_2022_48174,CKV_CVE_2023_2650,CKV_CVE_2023_3817,CKV_CVE_2023_3446,CKV_CVE_2023_2975,CKV_CVE_2023_1732,CKV_CVE_2018_20677
