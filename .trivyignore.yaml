@@ -1,0 +1,5 @@
+misconfigurations:
+  - id: AVD-AWS-0054
+    statement: "HTTPS is planned, and HTTP is used intentionally for
+    the first phase of rollout."
+    expired_at: 2024-01-31
