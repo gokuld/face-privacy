@@ -1,14 +1,20 @@
 FROM python:3.11-slim
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     curl \
     software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install pipenv
+RUN pip3 install --no-cache-dir --upgrade \
+    pip \
+    pipenv
 
-WORKDIR /app
+RUN groupadd streamlit-ui && useradd --no-log-init -g streamlit-ui streamlit-ui
+
+USER streamlit-ui:streamlit-ui
+
+WORKDIR /home/streamlit-ui
 
 COPY ./src/ .
 
