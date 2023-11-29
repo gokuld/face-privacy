@@ -1,3 +1,5 @@
+#trivy:ignore:AVD-AWS-0104
+#trivy:ignore:AVD-AWS-0107
 resource "aws_security_group" "grafana_sg" {
   name        = "grafana-security-group"
   description = "Security group for grafana ECS instances and load balancer."

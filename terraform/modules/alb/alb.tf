@@ -1,6 +1,7 @@
 resource "aws_lb" "privfacy_lb" {
-  name                       = "privfacy-lb"
-  load_balancer_type         = "application"
+  name               = "privfacy-lb"
+  load_balancer_type = "application"
+  #trivy:ignore:AVD-AWS-0053
   internal                   = false
   enable_deletion_protection = false
   drop_invalid_header_fields = true

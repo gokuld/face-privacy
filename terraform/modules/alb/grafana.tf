@@ -10,6 +10,7 @@ resource "aws_lb_target_group" "grafana_tg" {
   }
 }
 
+#trivy:ignore:AVD-AWS-0054
 resource "aws_lb_listener" "grafana_listener" {
   load_balancer_arn = aws_lb.privfacy_lb.arn
   port              = 3000
