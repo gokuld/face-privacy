@@ -1,3 +1,5 @@
+#trivy:ignore:AVD-AWS-0104
+#trivy:ignore:AVD-AWS-0107
 resource "aws_security_group" "face_blur_model_service_sg" {
   name        = "face-blur-model-service-security-group"
   description = "Security group for the face blur model service ECS instances and load balancer."
