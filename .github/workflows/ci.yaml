@@ -25,3 +25,20 @@ jobs:
       env:
         BC_API_KEY: ${{ secrets.BRIDGECREW_CHECKOV_API_KEY }}
       run: pipenv run pre-commit run --all-files
+
+    - name: Run Trivy scanner for vulnerabilities, miconfigured IaC, secrets and license
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: fs
+        scanners: 'vuln,config,secret,license'
+        hide-progress: false
+        #format: 'sarif'
+        # output: 'trivy-results.sarif'
+        exit-code: '1'
+        ignore-unfixed: false
+        severity: 'CRITICAL,HIGH,MEDIUM'
+
+    # - name: Upload Trivy scan results to GitHub Security tab
+    #   uses: github/codeql-action/upload-sarif@v2
+    #   with:
+    #     sarif_file: 'trivy-results.sarif'
