@@ -10,7 +10,7 @@ ${yamlencode({
   write_files = [
     {
       path = "/etc/prometheus/prometheus.yml",
-      content = file("./modules/ec2/prometheus.yml")
+      content = file("${output_filepath}")
     }
   ],
 
