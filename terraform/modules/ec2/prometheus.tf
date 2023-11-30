@@ -1,5 +1,5 @@
 data "template_file" "cloud_init" {
-  template = templatefile("./modules/ec2/prometheus-cloud-init-script.yaml.tftpl", {})
+  template = templatefile("${path.module}/prometheus-cloud-init-script.yaml.tftpl", { output_filepath = "${path.module}/prometheus.yml" })
 }
 
 resource "aws_instance" "prometheus_instance" {
