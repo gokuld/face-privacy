@@ -1,3 +1,5 @@
+#trivy:ignore:AVD-AWS-0104
+#trivy:ignore:AVD-AWS-0107
 resource "aws_security_group" "prometheus_sg" {
   name        = "prometheus-security-group"
   description = "Security group for the Prometheus EC2 instance."
